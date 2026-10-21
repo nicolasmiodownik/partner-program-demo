@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Partner Program Demo</title>
+  <meta name="description" content="A small partner program built on Supabase: partner intake with auto-triage, a review queue and referral attribution down to revenue.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="wrap top">
+    <div>
+      <p class="eyebrow">Built on Supabase</p>
+      <h1>Partner Program Demo</h1>
+      <p class="lede">How a partner program could run end to end: partners apply, get scored automatically, and every referral is tracked from signup to revenue. Data is fictional.</p>
+    </div>
+    <a class="cta" href="#apply">Apply as a partner</a>
+  </header>
+
+  <main class="wrap">
+    <section aria-labelledby="kpi-title">
+      <h2 id="kpi-title" class="sr-only">Program totals</h2>
+      <div class="kpis" id="kpis">
+        <div class="kpi"><span class="kpi-label">Referred signups</span><span class="kpi-value" data-kpi="signups">–</span></div>
+        <div class="kpi"><span class="kpi-label">Activation rate</span><span class="kpi-value" data-kpi="activation">–</span></div>
+        <div class="kpi"><span class="kpi-label">Paid conversion</span><span class="kpi-value" data-kpi="paid">–</span></div>
+        <div class="kpi"><span class="kpi-label">MRR from partners</span><span class="kpi-value" data-kpi="mrr">–</span></div>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="trend-title">
+      <div class="card-head">
+        <h2 id="trend-title">Monthly referred signups</h2>
+        <p class="hint">Bar height is signups; the label is new MRR that month.</p>
+      </div>
+      <div class="bars" id="bars" role="img" aria-label="Monthly referred signups"></div>
+    </section>
+
+    <section class="card" aria-labelledby="perf-title">
+      <div class="card-head">
+        <h2 id="perf-title">Partner performance</h2>
+        <p class="hint">Volume is not the same as value. Sort by MRR per signup to see which partners bring the best customers.</p>
+      </div>
+      <div class="insight" id="insight" hidden></div>
+      <div class="table-scroll">
+        <table id="perf">
+          <thead>
+            <tr>
+              <th data-sort="name" scope="col">Partner</th>
+              <th data-sort="type" scope="col">Type</th>
+              <th data-sort="signups" scope="col" class="num">Signups</th>
+              <th data-sort="activation_rate" scope="col" class="num">Activation</th>
+              <th data-sort="paid_rate" scope="col" class="num">Paid</th>
+              <th data-sort="mrr_usd" scope="col" class="num">MRR</th>
+              <th data-sort="mrr_per_signup" scope="col" class="num">MRR / signup</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="queue-title">
+      <div class="card-head">
+        <h2 id="queue-title">Review queue</h2>
+        <p class="hint">Every application is scored on arrival (type, expected volume, use case), so the team reviews the best ones first. Contact details are never exposed.</p>
+      </div>
+      <ol class="queue" id="queue"></ol>
+    </section>
+
+    <section class="card" id="apply" aria-labelledby="apply-title">
+      <div class="card-head">
+        <h2 id="apply-title">Apply to become a partner</h2>
+        <p class="hint">Submissions go straight into the review queue above with an automatic fit score.</p>
+      </div>
+      <form id="apply-form" novalidate>
+        <div class="grid">
+          <label>Company<input name="company_name" required maxlength="120"></label>
+          <label>Your name<input name="contact_name" required maxlength="120"></label>
+          <label>Work email<input name="contact_email" type="email" required maxlength="200"></label>
+          <label>Website<input name="website" type="url" placeholder="https://" maxlength="200"></label>
+          <label>Partner type
+            <select name="type" required>
+              <option value="marketplace">Marketplace</option>
+              <option value="integration">Integration</option>
+              <option value="referral" selected>Referral</option>
+              <option value="agency">Agency</option>
+            </select>
+          </label>
+          <label>Expected referrals per month<input name="expected_referrals_month" type="number" min="0" max="100000" value="20" required></label>
+        </div>
+        <label>How would you work with us?<textarea name="use_case" required minlength="20" maxlength="1000" rows="4" placeholder="Who your audience is and how you would bring them in"></textarea></label>
+        <div class="form-foot">
+          <button type="submit">Submit application</button>
+          <p class="form-msg" id="form-msg" role="status"></p>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="wrap foot">
+    <p>Built by Nicolás Miodownik with Supabase (Postgres, Row Level Security, triggers and views). Source on GitHub.</p>
+  </footer>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
